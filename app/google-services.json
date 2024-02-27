@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633457127728",
+    "project_id": "spend-swift",
+    "storage_bucket": "spend-swift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633457127728:android:e2bc148aad665f24a058f5",
+        "android_client_info": {
+          "package_name": "com.spend.swift"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC51D2GgiEkf4KTn5OOYWKCepoEWcRGbOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

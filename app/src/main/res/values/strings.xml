@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Spend Swift</string>
+    <string name="login">Log In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="dont_have_account">Don\'t have an account yet?</string>
+    <string name="signup">Sign Up</string>
+    <string name="have_account">Already have a profile?</string>
+    <string name="invalid_mail">Invalid mail</string>
+    <string name="invalid_pass">Pass must have at least 6 signs</string>
+    <string name="error_try_again">Error, try again</string>
+    <string name="check_internet_connection">Check internet connection</string>
+    <string name="duplicate_email">Error: duplicate email</string>
+    <string name="check_data_and_again">Check your data and try again</string>
+    <string name="nick">Nickname</string>
+    <string name="min_nick_error">Error: min length of nick is 4 symbols</string>
+    <string name="nick_explanation">Please enter your nickname (this way other users of this profile will know who bought this or that product, etc:)</string>
+    <string name="current_buys">Current buys</string>
+    <string name="closed_buys">Closed buys</string>
+    <string name="account">Account</string>
+    <string name="categories">Categories</string>
+    <string name="basic_goods">Basic Goods</string>
+    <string name="category_name">Catagory name</string>
+    <string name="edit">Edit</string>
+</resources>
