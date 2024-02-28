@@ -30,29 +30,26 @@ class CategoriesViewModel : ViewModel(){
     val categories = _categories.asStateFlow()
 
     init {
-        firebaseAuth(
-            onSuccess = {
-                db.collection(Collections.Categories.name)
-                    .whereEqualTo("profileId", SharedPrefsHelper.readStr(SharedKeys.ProfileId))
-                    .addSnapshotListener{ querySnapshot, error ->
-                        if(querySnapshot != null && !querySnapshot.isEmpty){
-                            val catList = mutableListOf<Category>()
-                            querySnapshot.documents.forEach { docSnapshot ->
-                                val cat = Category(
-                                    name = docSnapshot.getString("name") ?: "",
-                                    profileId = docSnapshot.getString("profileId") ?: "",
-                                    iconId = docSnapshot.getLong("iconId")?.toInt() ?: 0,
-                                    docId = docSnapshot.id,
-                                )
-                                catList.add(cat)
-                            }
-                            _categories.value = catList
-                        }
-                    }
-            }
-        ) {
+        firebaseAuth {
             errorEnd(R.string.check_internet_connection)
         }
+        db.collection(Collections.Categories.name)
+            .whereEqualTo("profileId", SharedPrefsHelper.readStr(SharedKeys.ProfileId))
+            .addSnapshotListener{ querySnapshot, error ->
+                if(querySnapshot != null && !querySnapshot.isEmpty){
+                    val catList = mutableListOf<Category>()
+                    querySnapshot.documents.forEach { docSnapshot ->
+                        val cat = Category(
+                            name = docSnapshot.getString("name") ?: "",
+                            profileId = docSnapshot.getString("profileId") ?: "",
+                            iconId = docSnapshot.getLong("iconId")?.toInt() ?: 0,
+                            docId = docSnapshot.id,
+                        )
+                        catList.add(cat)
+                    }
+                    _categories.value = catList
+                }
+            }
     }
 
     fun save(newCategory: Category) {

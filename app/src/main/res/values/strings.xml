@@ -27,4 +27,9 @@
     <string name="remove">Remove</string>
     <string name="remove_quest">Remove this item?</string>
     <string name="attention">Attention</string>
+    <string name="all">All</string>
+    <string name="invalid_name">Invalid name - pick another one</string>
+    <string name="min_lenght">Min lenght - 4 symbols</string>
+    <string name="basic_product_name">Basic product</string>
+    <string name="duplicate">Error - duplicate name</string>
 </resources>

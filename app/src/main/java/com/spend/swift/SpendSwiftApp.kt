@@ -8,6 +8,8 @@ import com.maltaisn.iconpack.defaultpack.createDefaultIconPack
 import com.spend.swift.db.firebaseAuth
 import com.spend.swift.helpers.SharedPrefsHelper
 
+const val DEFAULT_ICON_ID = 955
+
 class SpendSwiftApp : Application() {
 
     companion object {

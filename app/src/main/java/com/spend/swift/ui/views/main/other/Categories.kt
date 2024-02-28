@@ -60,6 +60,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.maltaisn.icondialog.IconDialog
 import com.maltaisn.icondialog.IconDialogSettings
+import com.spend.swift.DEFAULT_ICON_ID
 import com.spend.swift.MainActivity
 import com.spend.swift.R
 import com.spend.swift.SpendSwiftApp
@@ -84,7 +85,7 @@ fun Categories(
 ){
     var isAddDialogShow by remember { mutableStateOf(false) }
     var isRemoveDialogShow by remember { mutableStateOf(false) }
-    val categoryPattern = Category("", 955, SharedPrefsHelper.readStr(SharedKeys.ProfileId)?:"0")
+    val categoryPattern = Category("", DEFAULT_ICON_ID, SharedPrefsHelper.readStr(SharedKeys.ProfileId)?:"0")
     var category by remember { mutableStateOf(categoryPattern) }
     val viewModel: CategoriesViewModel = viewModel()
 
@@ -193,7 +194,6 @@ fun Categories(
             LoadingDialog()
         }
     }
-
 }
 
 @Composable
@@ -226,7 +226,11 @@ private fun AddCategoryDialog(
             IconButton(onClick = {
                 if (category.name.trim().length < 4){
                     activity.toast(R.string.min_category_name)
-                } else {
+                }
+                else if(category.name.lowercase() == SpendSwiftApp.getCtx().getString(R.string.all).lowercase()){
+                    activity.toast(R.string.invalid_name)
+                }
+                else {
                     onSuccess(category)
                 }
             }) {
@@ -288,9 +292,6 @@ private fun AddCategoryDialog(
                 }
 
             }
-
-
-
         }
     )
     LaunchedEffect(Unit){
