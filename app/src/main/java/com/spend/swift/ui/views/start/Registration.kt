@@ -35,7 +35,6 @@ import com.spend.swift.R
 import com.spend.swift.helpers.SharedKeys
 import com.spend.swift.helpers.SharedPrefsHelper
 import com.spend.swift.ui.theme.SpendSwiftTheme
-import com.spend.swift.ui.view_models.SignViewModel
 import com.spend.swift.ui.views.custom.LoadingDialog
 import com.spend.swift.ui.views.custom.MainButton
 import com.spend.swift.ui.views.custom.NickAlertDialog

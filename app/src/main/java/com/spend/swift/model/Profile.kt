@@ -6,13 +6,12 @@ import java.util.UUID
 data class Profile(
     val email: String = "",
     val password: String = "",
-    val id: Long = Date().time
+    val id: String = ""
 ){
     fun toMap(): MutableMap<String, Any>{
         return mutableMapOf(
             "email" to email,
             "password" to password,
-            "id" to id
         )
     }
 }

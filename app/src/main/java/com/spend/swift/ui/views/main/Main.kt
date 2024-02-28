@@ -18,6 +18,7 @@ import com.spend.swift.ui.views.Views
 import com.spend.swift.ui.views.custom.BuysListScaffold
 import com.spend.swift.ui.views.main.lists.ClosedBuys
 import com.spend.swift.ui.views.main.lists.CurrentBuys
+import com.spend.swift.ui.views.main.other.BasicGoods
 import com.spend.swift.ui.views.main.other.Categories
 
 @Preview
@@ -31,7 +32,7 @@ fun Main(){
 
 @Composable
 private fun NavigationHost(navController: NavHostController) {
-    NavHost(navController, startDestination = Views.Categories.path) { // BottomNavItem.CurrentBuys.path
+    NavHost(navController, startDestination = Views.BasicGoods.path) { // BottomNavItem.CurrentBuys.path
         composable(BottomNavItem.CurrentBuys.path) {
             BuysListScaffold(navController = navController) {
                 CurrentBuys(navController)
@@ -46,7 +47,7 @@ private fun NavigationHost(navController: NavHostController) {
             androidx.compose.material3.Text(text = "account", )
         }
         composable(Views.Categories.path) { Categories(navController) }
-        composable(Views.BasicGoods.path) { androidx.compose.material3.Text(text = "basic goods") }
+        composable(Views.BasicGoods.path) { BasicGoods(navController) }
     }
 }
 

@@ -22,4 +22,9 @@
     <string name="basic_goods">Basic Goods</string>
     <string name="category_name">Catagory name</string>
     <string name="edit">Edit</string>
+    <string name="min_category_name">Min length of category name is 4 symbols</string>
+    <string name="duplicate_category">Duplicate category name</string>
+    <string name="remove">Remove</string>
+    <string name="remove_quest">Remove this item?</string>
+    <string name="attention">Attention</string>
 </resources>

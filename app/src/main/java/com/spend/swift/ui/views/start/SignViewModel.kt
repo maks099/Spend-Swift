@@ -1,6 +1,5 @@
-package com.spend.swift.ui.view_models
+package com.spend.swift.ui.views.start
 
-import android.util.Log
 import android.util.Patterns
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
@@ -41,8 +40,8 @@ class SignViewModel : ViewModel() {
                         .get()
                         .addOnSuccessListener { documents ->
                             if (documents != null && !documents.isEmpty){
-                                val id = documents.first().get("id").toString().toLong()
-                                SharedPrefsHelper.saveLong(SharedKeys.ProfileId, id)
+                                val id = documents.first().id
+                                SharedPrefsHelper.saveStr(SharedKeys.ProfileId, id)
                                 isLoadingDialogShow = false
                                 profile = profile.copy(id = id)
                                 onSuccess()
@@ -70,7 +69,7 @@ class SignViewModel : ViewModel() {
                                 .add(profile.toMap())
                                 .addOnSuccessListener {
                                     isLoadingDialogShow = false
-                                    SharedPrefsHelper.saveLong(SharedKeys.ProfileId, profile.id)
+                                    SharedPrefsHelper.saveStr(SharedKeys.ProfileId, it.id)
                                     onSuccess()
                                 }
                                 .addOnFailureListener {
