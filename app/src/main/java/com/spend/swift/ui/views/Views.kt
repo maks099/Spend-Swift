@@ -7,4 +7,5 @@ sealed class Views(val path: String) {
     data object Account: Views("account")
     data object Categories: Views("categories")
     data object BasicGoods: Views("basic_goods")
+    data object Products: Views("products/{listId}")
 }

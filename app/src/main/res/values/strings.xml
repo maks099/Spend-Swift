@@ -32,4 +32,9 @@
     <string name="min_lenght">Min lenght - 4 symbols</string>
     <string name="basic_product_name">Basic product</string>
     <string name="duplicate">Error - duplicate name</string>
+    <string name="shopping_list_name">Shopping list name</string>
+    <string name="by">by</string>
+    <string name="buy_up_to">Buy up to</string>
+    <string name="product_name">Product name</string>
+    <string name="added_by">Added by</string>
 </resources>

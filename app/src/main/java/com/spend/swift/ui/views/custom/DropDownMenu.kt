@@ -65,7 +65,10 @@ fun CategoryDropdownMenu(
                     colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent
+                        disabledIndicatorColor = Color.Transparent,
+                        focusedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
