@@ -289,6 +289,7 @@ private fun ShoppingListRow(
                     Column {
                         Text(
                             text = "${stringResource(id = R.string.buy_up_to)} ${shoppingList.completionDate.asDate()}",
+                            color = if(shoppingList.completionDate < Date().time) Color.Red else Color.Black,
                             fontSize = 12.sp
                         )
                         Text(
