@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), IconDialog.Callback {
         lifecycleScope.launch {
             icons.map { iconFlow.emit(it) }
         }
-        Toast.makeText(this, "${icons.map { it.id }}", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

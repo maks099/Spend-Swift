@@ -17,7 +17,6 @@ val kosugiMaruFontFamily = FontFamily(
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = kosugiMaruFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         color = Color.Black,
@@ -25,7 +24,6 @@ val Typography = Typography(
         letterSpacing = 0.5.sp,
     ),
     titleLarge = TextStyle(
-        fontFamily = kosugiMaruFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp,
         lineHeight = 28.sp,

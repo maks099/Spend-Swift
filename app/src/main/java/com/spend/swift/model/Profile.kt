@@ -1,5 +1,6 @@
 package com.spend.swift.model
 
+import com.spend.swift.helpers.md5
 import java.util.Date
 import java.util.UUID
 
@@ -11,7 +12,7 @@ data class Profile(
     fun toMap(): MutableMap<String, Any>{
         return mutableMapOf(
             "email" to email,
-            "password" to password,
+            "password" to password.md5(),
         )
     }
 }

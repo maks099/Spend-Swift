@@ -86,6 +86,7 @@ fun AccountSettings(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         TextBox(
+                            modifier = Modifier.weight(.7f),
                             title = R.string.nick,
                             initialValue = nickname,
                             keyboardType = KeyboardType.Text,
@@ -95,7 +96,7 @@ fun AccountSettings(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         OutlinedIconButton(
-                            modifier = Modifier.aspectRatio(1f),
+                            modifier = Modifier.aspectRatio(1f).weight(.2f),
                             onClick = {
                             if(nickname.trim().length >= 4){
                                 SharedPrefsHelper.saveStr(SharedKeys.Nickname, nickname)

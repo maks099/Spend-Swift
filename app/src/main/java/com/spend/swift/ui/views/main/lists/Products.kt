@@ -108,13 +108,16 @@ fun Products(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextBox(
+                        modifier = Modifier.weight(.6f),
                         title = R.string.product_name,
                         initialValue = pickedProduct.name,
                         keyboardType = KeyboardType.Text,
                         onChange = { pickedProduct = pickedProduct.copy(name = it) }
                     )
                     Spacer(modifier = Modifier.width(12.dp))
-                    OutlinedIconButton(onClick = {
+                    OutlinedIconButton(
+                        modifier = Modifier.weight(.2f),
+                        onClick = {
                         if(pickedProduct.name.trim().length < 4){
                             SpendSwiftApp.getCtx().toast(R.string.min_lenght)
                         } else {

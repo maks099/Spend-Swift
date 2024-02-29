@@ -14,13 +14,14 @@ import com.spend.swift.db.Collections
 import com.spend.swift.db.firebaseAuth
 import com.spend.swift.helpers.SharedKeys
 import com.spend.swift.helpers.SharedPrefsHelper
+import com.spend.swift.helpers.md5
 import com.spend.swift.helpers.toast
 import com.spend.swift.model.Profile
 
 class SignViewModel : ViewModel() {
     var profile by mutableStateOf(Profile(
-        email = "test@gmail.com",
-        password = "Helloworld2#"
+        email = "",
+        password = ""
     ))
 
     var isLoadingDialogShow by mutableStateOf(false)
@@ -36,7 +37,7 @@ class SignViewModel : ViewModel() {
                 onSuccess = {
                     db.collection(Collections.Profiles.name)
                         .whereEqualTo("email", profile.email)
-                        .whereEqualTo("password", profile.password)
+                        .whereEqualTo("password", profile.password.md5())
                         .get()
                         .addOnSuccessListener { documents ->
                             if (documents != null && !documents.isEmpty){

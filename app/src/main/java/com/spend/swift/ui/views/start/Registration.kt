@@ -94,7 +94,7 @@ fun Registration(
                 ) { viewModel.profile = viewModel.profile.copy(password = it) }
             }
             MainButton(
-                modifier = Modifier.fillMaxWidth(.5f),
+                modifier = Modifier.fillMaxWidth(.7f),
                 res = R.string.signup
             ) {
                 viewModel.signIn {

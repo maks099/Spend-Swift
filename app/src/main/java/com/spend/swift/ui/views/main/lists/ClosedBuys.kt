@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.spend.swift.DEFAULT_ICON_ID
 import com.spend.swift.R
 import com.spend.swift.SpendSwiftApp
 import com.spend.swift.helpers.asDate
@@ -65,7 +66,7 @@ fun ClosedBuys(
 
     val products by viewModel.productsLists.collectAsState(emptyMap())
     val shoppingLists by viewModel.shoppingLists.collectAsState(emptyList())
-    val categories by viewModel.categories.collectAsState(emptyList())
+    val categories by viewModel.categories.collectAsState(listOf(Category(SpendSwiftApp.getCtx().getString(R.string.all), DEFAULT_ICON_ID, "")))
 
     var showEditDialog by remember { mutableStateOf(false) }
     var showRemoveDialog by remember { mutableStateOf(false) }
@@ -76,24 +77,26 @@ fun ClosedBuys(
         modifier = Modifier
             .padding(top = 8.dp)
     ){
-        stickyHeader {
-            Spacer(modifier = Modifier.height(8.dp))
-            FilterBlock(
-                modifier = Modifier.padding(horizontal = 24.dp),
-                categories = categories,
-                filter = filter
-            ){
-                filter = it
+        if (categories.size > 1) {
+            stickyHeader {
+                Spacer(modifier = Modifier.height(8.dp))
+                FilterBlock(
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    categories = categories,
+                    filter = filter
+                ) {
+                    filter = it
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
 
         products.forEach { (listId, productList) ->
-            if(productList.find { it.closedBy == "" } == null && productList.size > 1){
+            if(productList.find { it.closedBy == "" } == null && productList.isNotEmpty()){
                 item {
                     shoppingLists.find { it.docId == listId }?.let { shoppingList ->
                         val categoryFilterDrop = filter.category.docId.isNotEmpty() && shoppingList.categoryId != filter.category.docId
-                        val timeFilterDrop = filter.time != TIME.ALL_TIME && shoppingList.completionDate > getTimeByFilterProperty(coefficient = -1, time = filter.time)
+                        val timeFilterDrop = filter.time != TIME.ALL_TIME && shoppingList.completionDate < getTimeByFilterProperty(coefficient = -1, time = filter.time)
                         if (categoryFilterDrop || timeFilterDrop){
                             return@let
                         }

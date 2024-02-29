@@ -66,6 +66,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.spend.swift.DEFAULT_ICON_ID
 import com.spend.swift.R
 import com.spend.swift.SpendSwiftApp
 import com.spend.swift.helpers.asDate
@@ -91,7 +92,7 @@ fun CurrentBuys(
     navController: NavController = rememberNavController()
 ){
     val viewModel: BuysViewModel = viewModel()
-    val categories by viewModel.categories.collectAsState(listOf(Category.getTemplate()))
+    val categories by viewModel.categories.collectAsState(listOf(Category(SpendSwiftApp.getCtx().getString(R.string.all), DEFAULT_ICON_ID, "")))
 
     val products by viewModel.productsLists.collectAsState(emptyMap())
     val shoppingLists by viewModel.shoppingLists.collectAsState(emptyList())
@@ -123,17 +124,20 @@ fun CurrentBuys(
                 .fillMaxSize()
                 .padding(top = 8.dp)
         ) {
-            stickyHeader {
-                Spacer(modifier = Modifier.height(8.dp))
-                FilterBlock(
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    categories = categories,
-                    filter = filter
-                ){
-                    filter = it
+            if (categories.size > 1){
+                stickyHeader {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    FilterBlock(
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        categories = categories,
+                        filter = filter
+                    ){
+                        filter = it
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
-                Spacer(modifier = Modifier.height(8.dp))
             }
+
 
             products.map { map ->
                 if(map.value.isEmpty() || map.value.find { it.closedBy == "" } != null){
@@ -470,7 +474,8 @@ fun EditAlertDialog(
 ){
     var shoppingList by remember { mutableStateOf(shoppingListObj) }
     var selectedCategory by remember { mutableStateOf(
-        if(shoppingListObj.categoryId == "") categories[0]
+        if(shoppingListObj.categoryId == "")
+            categories[0]
         else categories.find { it.docId == shoppingListObj.categoryId } ?: categories[0]
     ) }
 

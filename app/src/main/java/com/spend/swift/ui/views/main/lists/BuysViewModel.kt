@@ -138,8 +138,14 @@ class BuysViewModel : ViewModel() {
                         Category(SpendSwiftApp.getCtx().getString(R.string.all), DEFAULT_ICON_ID, profileId)
                     )
                     _categories.value = catList
+                } else {
+                    _categories.value = listOf(Category(SpendSwiftApp.getCtx().getString(R.string.all), DEFAULT_ICON_ID, profileId))
+                }
+                if(error != null){
+                    _categories.value = listOf(Category(SpendSwiftApp.getCtx().getString(R.string.all), DEFAULT_ICON_ID, profileId))
                 }
             }
+
     }
 
     private fun errorEnd(@StringRes res: Int){
