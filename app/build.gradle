@@ -82,5 +82,5 @@ dependencies {
     implementation "com.maltaisn:icondialog:3.3.0"
     implementation "com.maltaisn:iconpack-default:1.1.0"
 
-
+    implementation 'com.jakewharton:process-phoenix:2.2.0'
 }

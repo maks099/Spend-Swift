@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -170,7 +171,12 @@ private fun BottomNavigationBar(navController: NavController) {
                         launchSingleTop = true
                     }
                 },
-                icon = { Icon(painterResource(id = item.icon), tint = MaterialTheme.colorScheme.primary, contentDescription = null) },
+                unselectedContentColor = Color.Gray,
+                icon = { Icon(
+                    painterResource(id = item.icon),
+                    tint = if(currentRoute == item.path) MaterialTheme.colorScheme.primary else Color.Gray,
+                    contentDescription = null
+                ) },
                 label = { Text(stringResource(id = item.label)) }
             )
         }

@@ -2,6 +2,7 @@ package com.spend.swift
 
 import android.app.Application
 import android.content.Context
+import com.google.firebase.FirebaseApp
 import com.maltaisn.icondialog.pack.IconPack
 import com.maltaisn.icondialog.pack.IconPackLoader
 import com.maltaisn.iconpack.defaultpack.createDefaultIconPack
@@ -21,10 +22,9 @@ class SpendSwiftApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         appContext = applicationContext
-
         SharedPrefsHelper.init(applicationContext)
+        FirebaseApp.initializeApp(applicationContext)
         firebaseAuth()
         loadIconPack()
     }

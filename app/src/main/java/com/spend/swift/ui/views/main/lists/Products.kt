@@ -22,14 +22,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
@@ -60,8 +58,9 @@ import com.spend.swift.R
 import com.spend.swift.SpendSwiftApp
 import com.spend.swift.helpers.toast
 import com.spend.swift.model.Product
+import com.spend.swift.ui.views.custom.LoadingDialog
+import com.spend.swift.ui.views.custom.RemoveDialog
 import com.spend.swift.ui.views.custom.TextBox
-import kotlinx.coroutines.flow.forEach
 
 @OptIn(ExperimentalLayoutApi::class)
 @Preview
@@ -77,8 +76,9 @@ fun Products(
     val basicProducts by viewModel.basicProducts.collectAsState()
     val products by viewModel.products.collectAsState()
 
-    var product by remember { mutableStateOf(Product.getTemplate()) }
+    var pickedProduct by remember { mutableStateOf(Product.getTemplate()) }
     var helpListShow by remember { mutableStateOf(false) }
+    var showRemoveDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -109,17 +109,17 @@ fun Products(
                 ) {
                     TextBox(
                         title = R.string.product_name,
-                        initialValue = product.name,
+                        initialValue = pickedProduct.name,
                         keyboardType = KeyboardType.Text,
-                        onChange = { product = product.copy(name = it) }
+                        onChange = { pickedProduct = pickedProduct.copy(name = it) }
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     OutlinedIconButton(onClick = {
-                        if(product.name.trim().length < 4){
+                        if(pickedProduct.name.trim().length < 4){
                             SpendSwiftApp.getCtx().toast(R.string.min_lenght)
                         } else {
-                            viewModel.saveProduct(product.name)
-                            product = product.copy(name = "")
+                            viewModel.saveProduct(pickedProduct.name)
+                            pickedProduct = pickedProduct.copy(name = "")
                         }
                     }) {
                         Icon(imageVector = Icons.Default.Add, contentDescription = null)
@@ -177,23 +177,38 @@ fun Products(
                         ProductRow(
                             modifier = Modifier.fillMaxWidth(),
                             product = product
-                        )
-
-
+                        ){
+                            pickedProduct = product
+                            showRemoveDialog = true
+                        }
                     }
                 }
             }
-
         }
+    }
 
+    if(showRemoveDialog){
+        RemoveDialog(
+            onConfirm = {
+                viewModel.removeProduct(pickedProduct)
+                showRemoveDialog = false
+                pickedProduct = Product.getTemplate()
+            }
+        ){
+            showRemoveDialog = false
+        }
+    }
 
+    if(viewModel.showLoadingDialog){
+        LoadingDialog()
     }
 }
 
 @Composable
 private fun ProductRow(
     modifier: Modifier = Modifier,
-    product: Product
+    product: Product,
+    onDelete: () -> Unit
 ){
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -220,15 +235,16 @@ private fun ProductRow(
                 fontSize = 12.sp
             )
         }
-
-        OutlinedIconButton(
-            onClick = { /*TODO*/ },
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-                tint = Color.Red
-            )
+        if(product.closedBy.isEmpty()){
+            OutlinedIconButton(
+                onClick = onDelete,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = null,
+                    tint = Color.Red
+                )
+            }
         }
     }
 }

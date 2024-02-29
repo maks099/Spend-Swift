@@ -14,6 +14,7 @@ import com.spend.swift.ui.views.custom.BuysListScaffold
 import com.spend.swift.ui.views.main.lists.ClosedBuys
 import com.spend.swift.ui.views.main.lists.CurrentBuys
 import com.spend.swift.ui.views.main.lists.Products
+import com.spend.swift.ui.views.main.other.AccountSettings
 import com.spend.swift.ui.views.main.other.BasicProducts
 import com.spend.swift.ui.views.main.other.Categories
 
@@ -40,7 +41,7 @@ private fun NavigationHost(navController: NavHostController) {
             }
         }
         composable(Views.Account.path) {
-            androidx.compose.material3.Text(text = "account", )
+            AccountSettings(navController)
         }
         composable(Views.Categories.path) { Categories(navController) }
         composable(Views.BasicGoods.path) { BasicProducts(navController) }

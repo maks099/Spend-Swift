@@ -40,6 +40,7 @@ fun CategoryDropdownMenu(
     modifier: Modifier = Modifier,
     selected: Category,
     items: List<Category>,
+    widthCoef: Float = 1f,
     onClick: (Category) -> Unit
 ) {
     if (items.isNotEmpty()){
@@ -47,7 +48,7 @@ fun CategoryDropdownMenu(
 
         Box(
             modifier = modifier
-                .fillMaxWidth()
+                .fillMaxWidth(widthCoef)
         ) {
             ExposedDropdownMenuBox(
                 expanded = expanded,

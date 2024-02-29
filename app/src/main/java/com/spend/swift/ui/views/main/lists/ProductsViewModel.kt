@@ -53,7 +53,7 @@ class ProductsViewModel : ViewModel() {
                     createdBy = snapshot.getString("createdBy") ?: "",
                     categoryId = snapshot.getString("categoryId") ?: "",
                     completionDate = snapshot.getLong("completionDate") ?: 0,
-                    docId = snapshot.getString(listId) ?: "",
+                    docId = snapshot.id
                 )
                 _shoppingList.value = sList
                 loadBasicProducts(sList.categoryId)
@@ -76,10 +76,11 @@ class ProductsViewModel : ViewModel() {
                             addedBy = docSnap.getString("addedBy") ?: "",
                             closedBy = docSnap.getString("closedBy") ?: "",
                             price = docSnap.getLong("price")?.toInt() ?: 0,
+                            docId = docSnap.id
                         )
                         products.add(b)
                     }
-                    _products.value = products.sortedBy { it.closedBy.isEmpty() }
+                    _products.value = products.sortedBy { it.closedBy.isNotEmpty() }
                 }
             }
     }
@@ -100,7 +101,7 @@ class ProductsViewModel : ViewModel() {
                         name = docSnap.getString("name") ?: "",
                         categoryId = docSnap.getString("categoryId") ?: "",
                         profileId = docSnap.getString("profileId") ?: "",
-                        docId = docSnap.getString("docId") ?: "",
+                        docId = docSnap.id,
                     )
                     basicProductsList.add(b)
                 }
@@ -143,5 +144,22 @@ class ProductsViewModel : ViewModel() {
         ){
             errorEnd(R.string.check_internet_connection)
         }
+    }
+
+    fun removeProduct(product: Product) {
+        showLoadingDialog = true
+        firebaseAuth(
+            onSuccess = {
+                db.collection(Collections.Products.name)
+                    .document(product.docId)
+                    .delete()
+                    .addOnSuccessListener {
+                        showLoadingDialog = false
+                    }
+                    .addOnFailureListener{
+                        errorEnd(R.string.error_try_again)
+                    }
+            }
+        ){ errorEnd(R.string.check_internet_connection) }
     }
 }

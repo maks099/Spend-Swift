@@ -37,4 +37,19 @@
     <string name="buy_up_to">Buy up to</string>
     <string name="product_name">Product name</string>
     <string name="added_by">Added by</string>
+    <string name="empty">Empty!</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
+    <string name="closed_by">Closed by</string>
+    <string name="open_product">Do you confirm this operation?\n(You will not be able to return to the previous value)</string>
+    <string name="close_list_toast">List moved to the \"Completed purchases\" group</string>
+    <string name="list_duplicate_toast">The list is duplicated in the \"Current purchases\" group</string>
+    <string name="duplicate_title">Duplicate</string>
+    <string name="year">Year</string>
+    <string name="cvartal">Cvartal</string>
+    <string name="month">Month</string>
+    <string name="all_time">All time</string>
+    <string name="nick_is_updated">Nickname was updated</string>
+    <string name="nick_update_mark">Changing the nickname will not change the previously added data about the listings and the products in them</string>
+    <string name="logout">Log Out</string>
 </resources>
