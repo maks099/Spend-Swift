@@ -2,7 +2,7 @@
 mobile purchase manager
 
 
-![](images/1.png) ![](images/Picture.png) ![](images/2.png) 
+<img src="images/1.png" width="200"/> ![](images/Picture.png) ![](images/2.png) 
 
 ![](images/3.png) ![](images/4.png) ![](images/5.png) ![](images/6.png) 
 
